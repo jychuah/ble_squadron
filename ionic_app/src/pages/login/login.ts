@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { NavController, NavParams, Slides } from 'ionic-angular';
 import { ParticleProvider } from '../../providers/particle/particle';
-import { DeviceListComponent } from '../../components/device-list/device-list';
 import { Storage } from '@ionic/storage';
 
 /**
@@ -10,7 +9,6 @@ import { Storage } from '@ionic/storage';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

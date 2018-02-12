@@ -1,3 +1,9 @@
+# Ionic
+ionic_app/platforms
+ionic_app/plugins
+ionic_app/www
+ionic_app/package-lock.json
+
 # Logs
 logs
 *.log

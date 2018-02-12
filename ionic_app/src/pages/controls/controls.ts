@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
 import { ParticleProvider } from '../../providers/particle/particle';
 import { AlertController } from 'ionic-angular';
 
@@ -11,7 +10,6 @@ import { AlertController } from 'ionic-angular';
 export class ControlsPage {
   public engine_glow: number = 255;
   public engine_flicker: number = 40;
-  private subscription: any = null;
   
   constructor(public navCtrl: NavController, public particle: ParticleProvider, private alertCtrl: AlertController) {
   }

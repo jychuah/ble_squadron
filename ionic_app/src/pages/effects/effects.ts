@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
 import { ParticleProvider } from '../../providers/particle/particle';
 import { AlertController } from 'ionic-angular';
 

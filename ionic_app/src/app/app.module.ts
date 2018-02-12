@@ -25,7 +25,7 @@ import { IonicStorageModule } from '@ionic/storage';
     EffectsPage,
     LoginPage,
     DeviceListComponent,
-    ParticleProgressComponent
+    ParticleProgressComponent,
   ],
   imports: [
     BrowserModule,
