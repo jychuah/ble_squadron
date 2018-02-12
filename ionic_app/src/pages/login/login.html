@@ -1,0 +1,63 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Welcome!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-slides #setupSlides>
+        <ion-slide #welcomeSlide *ngIf="currentSlide=='welcomeSlide'">
+            <div>Welcome!</div>
+            <div *ngIf="loading">
+                <div>Loading your preferences</div>
+                <ion-spinner></ion-spinner>
+            </div>
+            <div *ngIf="!loading">
+                <button ion-button (click)="continueButton()">Continue</button>
+            </div>
+        </ion-slide>
+        <ion-slide #loginSlide *ngIf="currentSlide=='loginSlide'">
+            <div> 
+                Please log in to your Particle.io account.
+            </div>
+            <ion-list>
+                <ion-item>
+                    <ion-label fixed>E-mail</ion-label>
+                    <ion-input type="email" value="" [(ngModel)]="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label fixed>Password</ion-label>
+                    <ion-input type="password" value="" [(ngModel)]="password"></ion-input>
+                </ion-item>
+            </ion-list>
+            <button ion-button (click)="doLogin()">Login</button>
+            <div *ngIf="loginFailed">
+                Your login information was incorrect. 
+            </div>
+        </ion-slide>
+        <ion-slide #deviceSlide *ngIf="currentSlide=='deviceSlide'">
+            <div *ngIf="loading">Fetching your devices <ion-spinner></ion-spinner></div>
+            <div *ngIf="!loading">Please select a device</div>
+            <device-list *ngIf="!loading" (onDeviceSelect)="onDeviceSelect($event)"></device-list>
+            <div *ngIf="error"><ion-icon name="close-circle" item-left></ion-icon>We were unable to retrieve your devices</div>
+            <button ion-button *ngIf="error">Try again</button>
+        </ion-slide>
+        <ion-slide #readySlide *ngIf="currentSlide=='readySlide'">
+            <div *ngIf="readyState=='loading'">Fetching your device <ion-spinner></ion-spinner></div>
+            <div *ngIf="readyState=='offline'">{{selectedDeviceName}} is offline.</div>
+            <div *ngIf="readyState=='notfound'">The device you selected or previously used is no longer connected to your account.</div>
+            <button ion-button *ngIf="readyState=='offline' || readyState=='notfound'" (click)="reselect()">Select another device</button>
+            <button ion-button *ngIf="readyState=='offline'" (click)="continueAnyway()">Continue anyway</button>
+            <div *ngIf="readyState=='ready'">Your device is ready to go!</div>
+            <button ion-button *ngIf="readyState=='ready'" (click)='navCtrl.pop()'>Continue</button>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

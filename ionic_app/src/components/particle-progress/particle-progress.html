@@ -1,0 +1,6 @@
+<!-- Generated template for the ParticleProgressComponent component -->
+<div class="progress-outer">
+    <div class="progress-inner" [class.enabled]="particle.device && particle.device.connected"  [style.width]="progress + '%'"> 
+        {{progress}}%
+    </div>
+</div>

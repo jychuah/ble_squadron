@@ -1,0 +1,10 @@
+<!-- Generated template for the DeviceListComponent component -->
+<div>
+    <ion-list-header>Your devices</ion-list-header>
+    <button ion-item *ngFor="let device of particle.devices" (click)="selectDevice(device)">
+        <ion-icon name="checkmark-circle" item-left *ngIf="particle.deviceId == device.id"></ion-icon>
+        <ion-icon name="" item-left *ngIf="particle.deviceId != device.id"></ion-icon>
+        {{device.name}}
+        <ion-icon name="alert" item-right *ngIf="!device.connected"></ion-icon>
+    </button>
+</div>

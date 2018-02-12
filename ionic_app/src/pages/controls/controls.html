@@ -1,0 +1,26 @@
+<ion-content padding> 
+    <ion-list>
+        <ion-list-header>
+            Engine Glow
+            <ion-badge item-end>{{engine_glow}}</ion-badge>
+        </ion-list-header>
+        <ion-item>
+            <ion-range [(ngModel)]="engine_glow" (ionChange)="updateEngine()" min="0" max="255">
+                <ion-icon range-left small name="remove-circle"></ion-icon>
+                <ion-icon range-right small name="add-circle"></ion-icon>
+            </ion-range>
+        </ion-item>
+        <ion-list-header>
+            Engine Flicker
+            <ion-badge item-end>{{engine_flicker}}</ion-badge>
+        </ion-list-header>
+        <ion-item>
+            <ion-range [(ngModel)]="engine_flicker" (ionChange)="updateEngine()" min="0" max="40">
+                <ion-icon range-left small name="remove-circle"></ion-icon>
+                <ion-icon range-right small name="add-circle"></ion-icon>
+            </ion-range>
+        </ion-item>
+    </ion-list>
+    <button ion-button full (click)="powerDown()" >Soft power down</button>
+</ion-content>
+

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding> 
+  <div *ngIf="!particle.token">
+      Please login and select a device. <br />
+      <button ion-button (click)="login()">Login</button>
+  </div>
+  <div *ngIf="particle.token && particle.device">
+    <ion-tabs style="text-shadow: none;">
+        <ion-tab tabTitle="Effects" [root]="tab1root">
+        </ion-tab>
+        <ion-tab tabTitle="Controls" [root]="tab2root">
+        </ion-tab>
+    </ion-tabs>
+  </div>
+</ion-content>
