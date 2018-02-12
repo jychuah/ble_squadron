@@ -1,26 +1,12 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+### Control App for Imperial Raider
 
-## How to use this template
+This app is built in [Ionic Framework](https://ionicframework.com). To deploy this app, you first need to:
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/driftyco/ionic2-app-base).
+- Install [NodeJS](https://nodejs.org)
+- Install Ionic with `npm install -g ionic`
+- Initialize this app with `ionic`
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/driftyco/ionic2-app-base).
+After initializing this app, you can use it in two ways:
 
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
-```
-
-Then, to run it, cd into `mySideMenu` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
+- Emulate it in your computer's browser with `ionic lab`
+- Deploy it to an Android or iOS Device by following [these instructions](https://ionicframework.com/docs/intro/deploying/)
