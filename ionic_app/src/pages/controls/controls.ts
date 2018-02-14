@@ -8,10 +8,31 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'controls.html'
 })
 export class ControlsPage {
-  public engine_glow: number = 255;
-  public engine_flicker: number = 40;
+  public engine_glow: number = 40;
+  public engine_flicker: number = 15;
   
   constructor(public navCtrl: NavController, public particle: ParticleProvider, private alertCtrl: AlertController) {
+  }
+
+  ionViewDidLoad() {
+    if (this.particle.token && this.particle.deviceId) {
+        this.particle.getVariable("glow").then(
+            (data) => {
+                console.log("Engine glow retrieved", data);
+                this.engine_glow = data as number;
+            },
+            (error) => {
+            }
+        );
+        this.particle.getVariable("flicker").then(
+            (data) => {
+                console.log("Engine flicker retrieved", data);
+                this.engine_flicker = data as number;
+            },
+            (error) => {
+            }
+        );
+    }
   }
 
   updateEngine() {
