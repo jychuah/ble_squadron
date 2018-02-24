@@ -10,6 +10,7 @@ import { AlertController } from 'ionic-angular';
 export class ControlsPage {
   public engine_glow: number = 40;
   public engine_flicker: number = 15;
+  public spotlight: number = 60;
   
   constructor(public navCtrl: NavController, public particle: ParticleProvider, private alertCtrl: AlertController) {
   }
@@ -28,6 +29,14 @@ export class ControlsPage {
             (data) => {
                 console.log("Engine flicker retrieved", data);
                 this.engine_flicker = data as number;
+            },
+            (error) => {
+            }
+        );
+        this.particle.getVariable("spotval").then(
+        (data) => {
+                console.log("Spotlight value retrieved", data);
+                this.spotlight = data as number;
             },
             (error) => {
             }
@@ -54,22 +63,20 @@ export class ControlsPage {
     );
   }
 
-  powerDown() {
-    console.log("Soft power down");
-    this.particle.callFunction("powerdown").then(
+  updateSpotlight() {
+    this.particle.callFunction("spotlight", this.spotlight + "").then( 
         (data) => {
-            console.log("powerdown function call success", data);
+            console.log("spotlight function call success", data);
         },
         (error) => {
-            console.log("powerdown function call error", error);
+            console.log("spotlight function call error", error);
             let alert = this.alertCtrl.create({
                 title: "Error",
-                subTitle: "Could not power down Imperial Raider",
+                subTitle: "Could not change spotlight settings",
                 buttons: ['Dismiss']
             });
             alert.present();
         }
-    );
+    ); 
   }
-
 }

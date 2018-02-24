@@ -12,13 +12,16 @@ export class EffectsPage {
   
   constructor(public navCtrl: NavController, public particle: ParticleProvider, private alertCtrl: AlertController) {
     this.effects = [ 
-        { "name" : "pewpew", "desc" : "Pew-Pew!", "subtitle" : "Lazers..." },
-        { "name" : "march", "desc" : "Imperial March", "subtitle" : "Duhh duhh duhhhhhhh" }
+        { "name" : "firestern", "desc" : "Forward Firing Arc", "subtitle" : "Concentrate forward firepower!" },
+        { "name" : "fireport", "desc" : "Left Firing Arc", "subtitle" : "Port turbolasers!" },
+        { "name" : "firestar", "desc" : "Right Firing Arc", "subtitle" : "Starboard turbolasers!" },
+        { "name" : "wash", "desc" : "Engine Spinup", "subtitle" : "Ahead full!" },
+        { "name" : "pewpew", "desc" : "Pew pew!", "subtitle" : "Lazers..." },
+        { "name" : "march", "desc" : "Imperial March!", "subtitle" : "Duhh Duhh Duhhhhh..." }
     ];
   }
 
   playEffect(effect: any) {
-    console.log("Play effect", effect);
     this.particle.callFunction("effect", effect.name).then(
         (data) => {
             console.log("effect function called", data);

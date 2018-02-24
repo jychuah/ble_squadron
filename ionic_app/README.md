@@ -1,6 +1,6 @@
 ### Control App for Imperial Raider
 
-This app is built in [Ionic Framework](https://ionicframework.com). To deploy this app, you first need to:
+This app is built in [Ionic Framework](https://ionicframework.com). There is a pre-built Android release [here](./imperial_raider.apk). Alternatively, you may build your own copy of this app for a different platform, such as iOS or for the web. To deploy this app, you first need to:
 
 - Install [NodeJS](https://nodejs.org)
 - Install Ionic with `npm install -g ionic`
@@ -26,4 +26,3 @@ export ANDROID_HOME="$HOME/Library/Android/sdk"
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin
 ```
-

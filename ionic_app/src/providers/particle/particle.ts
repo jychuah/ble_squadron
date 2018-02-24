@@ -16,6 +16,7 @@ export class ParticleProvider {
   public devices: any = [ ];
   public deviceId: string = null;
   public device: any = null;
+  public connected: boolean = false;
   private _events: any;
 
   constructor(private storage: Storage) {
@@ -78,6 +79,7 @@ export class ParticleProvider {
         this.getDevice(deviceId).then(
             (device) => {
                 this.device = device;
+                this.connected = this.device.connected;
                 resolve(device);
             },
             (error) => {
@@ -116,9 +118,6 @@ export class ParticleProvider {
         );
     });
     return promise;
-  }
-
-  getConnectionStatus(deviceId: string = this.deviceId) {
   }
 
   getEventStream(name: string, deviceId: string = this.deviceId) {
@@ -211,6 +210,7 @@ export class ParticleProvider {
                                     }
                                     if (this.device.id === result.coreid){
                                         this.device.id.connected = result.data == "online";
+                                        this.connected = result.data == "online";
                                     }
                                 }
                             });

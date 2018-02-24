@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>Imperial Raider</name>
+    <description>Control app for X-Wing Miniatures Imperial Raider</description>
+    <author email="jychuah@gmail.com" href="http://github.com/jychuah/imperial_raider/">Joon-Yee Chuah</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
