@@ -23,7 +23,9 @@ For a full demonstration of the project being controlled by the app, see the [vi
 
 ![Put all of that in here](./media/internal.jpg)
 
-I constructed this using the following breakout boards hardware:
+The total budget ran me more than $130. This is not including any hardware that I used during prototypes, or tools that I already had. Therefore, the good news is that if you ruin a perfectly good Imperial Raider, it still accounts for less than half your total budget. The bad news is that this is a pretty expensive project so don't tell your significant other.
+
+I constructed this using the following breakout boards:
 
 - [Particle.io Photon without headers](https://www.adafruit.com/product/2722)
 - [Adafruit Audio FX Sound Board + 2x2W Amp](https://www.adafruit.com/product/2217)
