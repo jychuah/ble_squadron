@@ -27,8 +27,7 @@ The total budget ran me more than $130. This is not including any hardware that 
 
 I constructed this using the following breakout boards:
 
-- [Particle.io Photon without headers](https://www.adafruit.com/product/2722)
-- [Adafruit Audio FX Sound Board + 2x2W Amp](https://www.adafruit.com/product/2217)
+- [Adafruit HUZZAH32](https://www.adafruit.com/product/3405)
 - [Adafruit 16-Channel 12-bit PWM/Servo Driver](https://www.adafruit.com/product/815)
 - [Adafruit PowerBoost 1000C](https://www.adafruit.com/product/2465)
 - [2000 mAh Battery](https://www.adafruit.com/product/2011)
@@ -61,7 +60,7 @@ Skills needed:
 ### In this repo
 
 - [A Fritzing diagram of the component connections](./fritzing)
-- [Firmware source for the Particle.io Photon](./firmware)
+- [Firmware source for the HUZZAH32](./firmware)
 - [Ionic Framework source code for the control app](./ionic_app)
 
 ### Brief summary

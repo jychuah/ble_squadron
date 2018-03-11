@@ -1,0 +1,17 @@
+<!-- Generated template for the BlelistComponent component -->
+<div [@visibility]="visibleState">
+    <ion-list no-lines>
+        <ion-list-header>Bluetooth Devices</ion-list-header>
+        <button ion-item *ngFor="let device_id of multible.device_ids" (click)="selectDevice(device_id)" [disabled]="!multible.isEnabled || disableSelect">
+            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && multible.devices[device_id].connected" name="checkmark-circle"></ion-icon>
+            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && !multible.devices[device_id].connected && !multible.devices[device_id].connecting" name="alert"></ion-icon>
+            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && multible.devices[device_id].connected" name="checkmark"></ion-icon>
+            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && !multible.devices[device_id].connected && multible.devices[device_id].stored && !multible.devices[device_id].connecting" name="">!</ion-icon>
+            <ion-spinner item-end *ngIf="multible.devices[device_id].connecting" name="bubbles"></ion-spinner>
+            {{ multible.devices[device_id].name ? multible.devices[device_id].name : device_id }}
+        </button>
+        <button ion-button full *ngIf="!multible.isEnabled" (click)="enableBluetooth()">Enable Bluetooth</button>
+        <button ion-button full *ngIf="multible.isEnabled && multible.scanning" (click)="stopScanning()">Stop Scanning&nbsp;&nbsp;&nbsp; <ion-spinner name="bubbles"></ion-spinner></button>
+        <button ion-button full *ngIf="multible.isEnabled && !multible.scanning" (click)="startScanning()">Start Scanning</button>
+    </ion-list>
+</div>

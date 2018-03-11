@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h3>A Page for {{ name }}</h3>
+    <button ion-button (click)="send()">Hello World</button>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar *ngIf="blelist && blelist.visibleState != 'visible'">
+        <span *ngIf="blelist">{{ deviceDisplayName }}</span>
+        <ion-buttons end>
+            <button ion-button (click)="switchDevice()">Switch device</button>
+        </ion-buttons>
+    </ion-toolbar>
+    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>
+</ion-footer>

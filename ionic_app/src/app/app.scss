@@ -1,4 +1,4 @@
-// http://ionicframework.com/docs/v2/theming/
+// http://ionicframework.com/docs/theming/
 
 
 // App Global Sass
@@ -14,23 +14,3 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-ion-content {
-  background-image: url('../assets/background/raider.png');
-  background-position: 25%;
-  background-repeat: no-repeat;
-  background-color: black;
-}
-
-ion-content > div {
-  color: white;
-  text-shadow: 1px 1px #111111;
-}
-
-.item {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.215);
-}
-
-.item-button {
-  color: white;
-}

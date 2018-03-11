@@ -5,10 +5,16 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content style="background: #000088; background-image: none;">
-    <device-list (onDeviceSelected)="selectDevice($event)"></device-list>
-    <button menuClose ion-item *ngIf="!particle.token" (click)="loginPage()">Login</button>
-    <button menuClose ion-item *ngIf="particle.token" (click)="particle.logout(); loginPage();">Logout</button>
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="openHome()">Home</button>
+      <ion-item-group>
+          <ion-item-divider color="light">Devices</ion-item-divider>
+          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">
+            {{ device }}
+          </button>
+      </ion-item-group>
+    </ion-list>
   </ion-content>
 
 </ion-menu>
