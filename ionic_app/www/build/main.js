@@ -10,7 +10,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_ble__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -214,7 +214,7 @@ var MultiBLEProvider = (function () {
             _this.scanning = false;
             _this.device_ids = Object.keys(_this.devices);
             // console.log("MultiBLEProvider::stopScan");
-        });
+        }, function (error) { });
     };
     MultiBLEProvider.prototype.startScan = function (services) {
         var _this = this;
@@ -358,9 +358,86 @@ webpackEmptyAsyncContext.id = 155;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmartAudioProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__ = __webpack_require__(199);
+// Code from Josh Morony
+// https://www.joshmorony.com/sound-effects-using-html5-and-native-audio-in-ionic/
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SmartAudioProvider = (function () {
+    function SmartAudioProvider(nativeAudio, platform) {
+        this.nativeAudio = nativeAudio;
+        this.audioType = 'html5';
+        this.sounds = [];
+        if (platform.is('cordova')) {
+            this.audioType = 'native';
+        }
+    }
+    SmartAudioProvider.prototype.preload = function (key, asset) {
+        if (this.audioType === 'html5') {
+            var audio = {
+                key: key,
+                asset: asset,
+                type: 'html5'
+            };
+            this.sounds.push(audio);
+        }
+        else {
+            this.nativeAudio.preloadSimple(key, asset);
+            var audio = {
+                key: key,
+                asset: key,
+                type: 'native'
+            };
+            this.sounds.push(audio);
+        }
+    };
+    SmartAudioProvider.prototype.play = function (key) {
+        var audio = this.sounds.find(function (sound) {
+            return sound.key === key;
+        });
+        if (audio.type === 'html5') {
+            var audioAsset = new Audio(audio.asset);
+            audioAsset.play();
+        }
+        else {
+            this.nativeAudio.play(audio.asset).then(function (res) {
+                console.log(res);
+            }, function (err) {
+                console.log(err);
+            });
+        }
+    };
+    SmartAudioProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]])
+    ], SmartAudioProvider);
+    return SmartAudioProvider;
+}());
+
+//# sourceMappingURL=smart-audio.js.map
+
+/***/ }),
+
+/***/ 200:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -389,14 +466,14 @@ var HomePage = (function () {
 
 /***/ }),
 
-/***/ 199:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DevicePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(103);
@@ -432,6 +509,8 @@ var DevicePage = (function () {
         this.uart_service_id = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
         this.uart_service_rx_id = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
         this.services = [this.uart_service_id]; // UART Serial service
+        this.config = {};
+        this.background = "";
         this.events.subscribe(this.multible.TOPIC, function (event) {
             if (_this.blelist && event.device_id == _this.device_id) {
                 if (event.event == "connected") {
@@ -454,6 +533,8 @@ var DevicePage = (function () {
             });
         }
     };
+    DevicePage.prototype.controlSlider = function (event) {
+    };
     DevicePage.prototype.deviceSelected = function (device_id) {
         this.device_id = device_id;
     };
@@ -463,7 +544,9 @@ var DevicePage = (function () {
     };
     DevicePage.prototype.ionViewDidEnter = function () {
         var _this = this;
-        this.name = this.navParams.get('name');
+        this.config = this.navParams.get('config');
+        this.name = this.config.name;
+        this.background = this.config.background;
         if (this.name && this.name.length) {
             this.storage_key = "device" + this.name;
             this.storage.get(this.storage_key).then(function (data) {
@@ -480,29 +563,30 @@ var DevicePage = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('blelist'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__["a" /* BLEListComponent */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__["a" /* BLEListComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__["a" /* BLEListComponent */]) === "function" && _a || Object)
     ], DevicePage.prototype, "blelist", void 0);
     DevicePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h3>A Page for {{ name }}</h3>\n    <button ion-button (click)="send()">Hello World</button>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/pages/device/device.html"*/
+            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding [style.background-image]="\'url(\' + background + \')\'">\n    <ion-list *ngIf="config.effects">\n        <ion-list-header>Effects</ion-list-header>\n        <button ion-item *ngFor="let effect of config.effects">{{ effect.desc }}</button>\n    </ion-list>\n    <ion-list *ngIf="config.controls">\n        <ion-list-header>Controls</ion-list-header>\n        <ion-range *ngFor="let control of config.controls" [min]="control.min" [max]="control.max" step="1">\n            <ion-icon small range-left name="sunny"></ion-icon>\n            <ion-icon range-right name="sunny"></ion-icon>\n        </ion-range>\n    </ion-list>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/pages/device/device.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */]) === "function" && _g || Object])
     ], DevicePage);
     return DevicePage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=device.js.map
 
 /***/ }),
 
-/***/ 200:
+/***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BLEListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_multible_multible__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -605,15 +689,15 @@ var BLEListComponent = (function () {
 
 /***/ }),
 
-/***/ 201:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(228);
 
 
 
@@ -622,31 +706,35 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 226:
+/***/ 228:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_device_device__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_device_device__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_ble__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_multible_multible__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_blelist_blelist__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__map_to_iterable_pipe_map_to_iterable_pipe__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_blelist_blelist__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__map_to_iterable_pipe_map_to_iterable_pipe__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_smart_audio_smart_audio__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_native_audio__ = __webpack_require__(199);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -692,7 +780,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_8__ionic_native_ble__["a" /* BLE */],
-                __WEBPACK_IMPORTED_MODULE_10__providers_multible_multible__["a" /* MultiBLEProvider */]
+                __WEBPACK_IMPORTED_MODULE_10__providers_multible_multible__["a" /* MultiBLEProvider */],
+                __WEBPACK_IMPORTED_MODULE_14__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */],
+                __WEBPACK_IMPORTED_MODULE_15__ionic_native_native_audio__["a" /* NativeAudio */]
             ]
         })
     ], AppModule);
@@ -703,17 +793,18 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 269:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_device_device__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_device_device__ = __webpack_require__(201);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -729,18 +820,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen) {
+    function MyApp(platform, statusBar, splashScreen, smartAudio) {
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
+        this.smartAudio = smartAudio;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
+        this.audioclips = [
+            { "name": "siren", "asset": "../assets/audio/T02.wav" },
+            { "name": "turbolaser", "asset": "../assets/audio/T03.wav" },
+            { "name": "enginewash", "asset": "../assets/audio/T04.wav" },
+            { "name": "pewpew", "asset": "../assets/audio/T05.wav" },
+            { "name": "march", "asset": "../assets/audio/T06.wav" }
+        ];
         // used for an example of ngFor and navigation
         this.devices = [
-            'Device 0',
-            'Device 1',
+            {
+                name: "Imperial Raider",
+                effects: [
+                    { "name": "firestern", "desc": "Forward Firing Arc", "subtitle": "Concentrate forward firepower!", "audio": "turbolaser" },
+                    { "name": "fireport", "desc": "Left Firing Arc", "subtitle": "Port turbolasers!", "audio": "turbolaser" },
+                    { "name": "firestar", "desc": "Right Firing Arc", "subtitle": "Starboard turbolasers!", "audio": "turbolaser" },
+                    { "name": "wash", "desc": "Engine Spinup", "subtitle": "Ahead full!", "audio": "enginewash" },
+                    { "name": "pewpew", "desc": "Pew pew!", "subtitle": "Lazers...", "audio": "pewpew" },
+                    { "name": "march", "desc": "Imperial March!", "subtitle": "Duhh Duhh Duhhhhh...", "audio": "march" }
+                ],
+                controls: [
+                    { "name": "glow", "desc": "Engine Glow", "min": 0, "max": 100 },
+                    { "name": "flicker", "desc": "Engine Flicker", "min": 0, "max": 30 },
+                    { "name": "spotlight", "desc": "Spotlight", "min": 0, "max": 100 },
+                ],
+                background: "/assets/imgs/background.jpeg"
+            },
+            {
+                name: "Millenium Falcon",
+                effects: [],
+                controls: [],
+                background: "/assets/imgs/logo.png"
+            }
         ];
+        for (var _i = 0, _a = this.audioclips; _i < _a.length; _i++) {
+            var clip = _a[_i];
+            this.smartAudio.preload(clip.name, clip.asset);
+        }
     }
     MyApp.prototype.initializeApp = function () {
         var _this = this;
@@ -752,30 +877,31 @@ var MyApp = (function () {
         });
     };
     MyApp.prototype.openHome = function () {
-        this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */]);
+        this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */]);
     };
     MyApp.prototype.openDevice = function (device) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_5__pages_device_device__["a" /* DevicePage */], { name: device });
+        this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_device_device__["a" /* DevicePage */], { config: device });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item (click)="openHome()">Home</button>\n      <ion-item-group>\n          <ion-item-divider color="light">Devices</ion-item-divider>\n          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">\n            {{ device }}\n          </button>\n      </ion-item-group>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item (click)="openHome()">Home</button>\n      <ion-item-group>\n          <ion-item-divider color="light">Ships</ion-item-divider>\n          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">\n            {{ device.name }}\n          </button>\n      </ion-item-group>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/jchuah/GitHub/imperial_raider/ionic_app/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]) === "function" && _e || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 281:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -812,5 +938,5 @@ var MapToIterable = (function () {
 
 /***/ })
 
-},[201]);
+},[203]);
 //# sourceMappingURL=main.js.map

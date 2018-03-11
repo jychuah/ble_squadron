@@ -7,9 +7,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <h3>A Page for {{ name }}</h3>
-    <button ion-button (click)="send()">Hello World</button>
+<ion-content padding [style.background-image]="'url(' + background + ')'">
+    <ion-list *ngIf="config.effects">
+        <ion-list-header>Effects</ion-list-header>
+        <button ion-item *ngFor="let effect of config.effects">{{ effect.desc }}</button>
+    </ion-list>
+    <ion-list *ngIf="config.controls">
+        <ion-list-header>Controls</ion-list-header>
+        <ion-range *ngFor="let control of config.controls" [min]="control.min" [max]="control.max" step="1">
+            <ion-icon small range-left name="sunny"></ion-icon>
+            <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+    </ion-list>
 </ion-content>
 
 <ion-footer>

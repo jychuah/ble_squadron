@@ -21,6 +21,8 @@ export class DevicePage {
   public uart_service_id = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
   public uart_service_rx_id = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
   public services: string[] = [ this.uart_service_id  ] // UART Serial service
+  public config: any = { };
+  public background: string = "";
 
   constructor(public navCtrl: NavController, public storage: Storage, public events: Events, public multible: MultiBLEProvider, public navParams: NavParams, public ble: BLE) {
     this.events.subscribe(this.multible.TOPIC, 
@@ -52,6 +54,9 @@ export class DevicePage {
     }
   }
 
+  controlSlider(event: any) {
+  }
+
   deviceSelected(device_id: string) {
     this.device_id = device_id;
   }
@@ -62,7 +67,9 @@ export class DevicePage {
   }
 
   ionViewDidEnter() {
-    this.name = this.navParams.get('name');
+    this.config = this.navParams.get('config');
+    this.name = this.config.name;
+    this.background = this.config.background;
     if (this.name && this.name.length) {
         this.storage_key = "device" + this.name;
         this.storage.get(this.storage_key).then(

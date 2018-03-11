@@ -212,7 +212,8 @@ export class MultiBLEProvider {
             this.scanning = false;
             this.device_ids = Object.keys(this.devices);
             // console.log("MultiBLEProvider::stopScan");
-        }
+        },
+        (error) => { }
     );
   }
 

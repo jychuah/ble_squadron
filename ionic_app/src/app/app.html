@@ -9,9 +9,9 @@
     <ion-list>
       <button menuClose ion-item (click)="openHome()">Home</button>
       <ion-item-group>
-          <ion-item-divider color="light">Devices</ion-item-divider>
+          <ion-item-divider color="light">Ships</ion-item-divider>
           <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">
-            {{ device }}
+            {{ device.name }}
           </button>
       </ion-item-group>
     </ion-list>

@@ -15,6 +15,8 @@ import { MultiBLEProvider } from '../providers/multible/multible';
 import { BLEListComponent } from '../components/blelist/blelist';
 import { MapToIterable } from './map-to-iterable-pipe/map-to-iterable-pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BLE,
-    MultiBLEProvider
+    MultiBLEProvider,
+    SmartAudioProvider,
+    NativeAudio
   ]
 })
 export class AppModule {}
