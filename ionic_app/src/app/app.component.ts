@@ -21,11 +21,11 @@ export class MyApp {
     this.initializeApp();
 
     this.audioclips = [
-        { "name" : "siren", "asset" : "../assets/audio/T02.wav" },
-        { "name" : "turbolaser", "asset" : "../assets/audio/T03.wav" },
-        { "name" : "enginewash", "asset" : "../assets/audio/T04.wav" },
-        { "name" : "pewpew", "asset" : "../assets/audio/T05.wav" },
-        { "name" : "march", "asset" : "../assets/audio/T06.wav" }
+        { "name" : "siren", "asset" : "assets/audio/T02.wav" },
+        { "name" : "turbolaser", "asset" : "assets/audio/T03.wav" },
+        { "name" : "enginewash", "asset" : "assets/audio/T04.wav" },
+        { "name" : "pewpew", "asset" : "assets/audio/T05.wav" },
+        { "name" : "march", "asset" : "assets/audio/T06.wav" }
     ];
 
     // used for an example of ngFor and navigation
@@ -41,17 +41,17 @@ export class MyApp {
                 { "name" : "march", "desc" : "Imperial March!", "subtitle" : "Duhh Duhh Duhhhhh...", "audio" : "march" }
             ],
             controls: [
-                { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100 },
-                { "name" : "flicker", "desc" : "Engine Flicker", "min" : 0, "max" : 30 },
-                { "name" : "spotlight", "desc" : "Spotlight", "min" : 0, "max" : 100 },
+                { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100, "value" : 30 },
+                { "name" : "flicker", "desc" : "Engine Flicker", "min" : 0, "max" : 30, "value" : 15 },
+                { "name" : "spotlight", "desc" : "Spotlight", "min" : 0, "max" : 100, "value" : 60 },
             ],
-            background: "/assets/imgs/background.jpeg"
+            background: "./assets/imgs/raider.png"
         },
         {
             name: "Millenium Falcon",
             effects: [ ],
             controls: [ ],
-            background: "/assets/imgs/logo.png"
+            background: "./assets/imgs/falcon.png"
         }
     ];
 

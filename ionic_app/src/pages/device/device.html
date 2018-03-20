@@ -7,17 +7,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding [style.background-image]="'url(' + background + ')'">
+<ion-content padding *ngIf="config" [style.background-image]="background"> 
     <ion-list *ngIf="config.effects">
-        <ion-list-header>Effects</ion-list-header>
-        <button ion-item *ngFor="let effect of config.effects">{{ effect.desc }}</button>
+        <ion-list-header class="device_item">Effects</ion-list-header>
+        <button class="device_item device_item-button" ion-item *ngFor="let effect of config.effects" (click)="runEffect(effect)">
+            <h3>{{ effect.desc }}</h3>
+            <p>{{ effect.subtitle }}</p>
+        </button>
     </ion-list>
     <ion-list *ngIf="config.controls">
-        <ion-list-header>Controls</ion-list-header>
-        <ion-range *ngFor="let control of config.controls" [min]="control.min" [max]="control.max" step="1">
-            <ion-icon small range-left name="sunny"></ion-icon>
-            <ion-icon range-right name="sunny"></ion-icon>
-        </ion-range>
+        <ion-list-header class="device_item">Controls</ion-list-header>
+        <ion-item class="device_item" *ngFor="let control of config.controls" class="device_item">
+            <ion-label><h3>{{ control.desc }}</h3></ion-label>
+            <ion-range class="device_item-button" [min]="control.min" [max]="control.max" [(ngModel)]="control.value" step="1" (ionChange)="controlSlider(control)">
+                <ion-icon small range-left name="sunny"></ion-icon>
+                <ion-icon range-right name="sunny"></ion-icon>
+            </ion-range>
+        </ion-item>
     </ion-list>
 </ion-content>
 

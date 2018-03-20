@@ -7,7 +7,7 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item (click)="openHome()">Home</button>
+      <button menuClose ion-item (click)="openHome()">Device Status</button>
       <ion-item-group>
           <ion-item-divider color="light">Ships</ion-item-divider>
           <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">

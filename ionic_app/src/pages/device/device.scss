@@ -1,3 +1,26 @@
 page-device {
+}
 
+page-device > ion-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+page-device > ion-footer {
+    background: rgba(255, 255, 255, 255);
+}
+
+page-device > ion-content > div {
+  color: white;
+  text-shadow: 1px 1px #111111;
+}
+
+.device_item {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.215);
+}
+
+.device_item-button {
+  color: white;
 }

@@ -25677,3 +25677,38 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+blelist {
+  background-color: rgba(1, 1, 1, 0.8);
+}
+
+page-device > ion-content {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+page-device > ion-footer {
+  background: white;
+}
+
+page-device > ion-content > div {
+  color: white;
+  text-shadow: 1px 1px #111111;
+}
+
+.device_item {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.215);
+}
+
+.device_item-button {
+  color: white;
+}
+
+page-home > ion-content {
+  background-image: url("../assets/imgs/helmet.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+}

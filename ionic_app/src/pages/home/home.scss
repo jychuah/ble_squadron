@@ -1,3 +1,10 @@
 page-home {
-
 }
+
+page-home > ion-content {
+    background-image: url('../assets/imgs/helmet.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+}
+

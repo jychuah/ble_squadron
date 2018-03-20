@@ -45,7 +45,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
     BLE,
     MultiBLEProvider,
     SmartAudioProvider,
-    NativeAudio
+    NativeAudio,
   ]
 })
 export class AppModule {}

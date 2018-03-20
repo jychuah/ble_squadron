@@ -4,6 +4,8 @@ import { BLEListComponent } from '../../components/blelist/blelist';
 import { MultiBLEProvider } from '../../providers/multible/multible';
 import { BLE } from '@ionic-native/ble';
 import { Storage } from '@ionic/storage';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-device',
@@ -22,9 +24,11 @@ export class DevicePage {
   public uart_service_rx_id = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
   public services: string[] = [ this.uart_service_id  ] // UART Serial service
   public config: any = { };
-  public background: string = "";
+  public background: SafeUrl;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public events: Events, public multible: MultiBLEProvider, public navParams: NavParams, public ble: BLE) {
+  constructor(public navCtrl: NavController, public storage: Storage, public events: Events, 
+                public multible: MultiBLEProvider, public navParams: NavParams, public ble: BLE,
+                public smartAudio: SmartAudioProvider, public dom: DomSanitizer) {
     this.events.subscribe(this.multible.TOPIC, 
         (event) => {
             if (this.blelist && event.device_id == this.device_id) {
@@ -40,10 +44,10 @@ export class DevicePage {
     );
   }
 
-  send() {
+  send(message: string) {
     var device = this.multible.devices[this.device_id];
     if (device && device.connected) {
-        this.ble.write(this.device_id, this.uart_service_id, this.uart_service_rx_id, this.multible.stringToBytes("spotlight 100")).then(
+        this.ble.write(this.device_id, this.uart_service_id, this.uart_service_rx_id, this.multible.stringToBytes(message)).then(
             (data) => { 
                 console.log("Write successful", data);
             },
@@ -54,7 +58,13 @@ export class DevicePage {
     }
   }
 
-  controlSlider(event: any) {
+  runEffect(effect: any) {
+    this.send("effect " + effect.name);
+    this.smartAudio.play(effect.audio);
+  }
+
+  controlSlider(control: any) {
+    this.send(control.name + " " + control.value);
   }
 
   deviceSelected(device_id: string) {
@@ -69,7 +79,8 @@ export class DevicePage {
   ionViewDidEnter() {
     this.config = this.navParams.get('config');
     this.name = this.config.name;
-    this.background = this.config.background;
+    this.background = this.dom.bypassSecurityTrustStyle("url('" + this.config.background + "')");
+    // this.background = this.config.background;
     if (this.name && this.name.length) {
         this.storage_key = "device" + this.name;
         this.storage.get(this.storage_key).then(
