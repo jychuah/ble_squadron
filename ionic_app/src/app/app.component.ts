@@ -21,11 +21,16 @@ export class MyApp {
     this.initializeApp();
 
     this.audioclips = [
-        { "name" : "siren", "asset" : "assets/audio/T02.wav" },
-        { "name" : "turbolaser", "asset" : "assets/audio/T03.wav" },
-        { "name" : "enginewash", "asset" : "assets/audio/T04.wav" },
-        { "name" : "pewpew", "asset" : "assets/audio/T05.wav" },
-        { "name" : "march", "asset" : "assets/audio/T06.wav" }
+        { "name" : "siren", "asset" : "assets/audio/raider/T02.wav" },
+        { "name" : "turbolaser", "asset" : "assets/audio/raider/T03.wav" },
+        { "name" : "enginewash", "asset" : "assets/audio/raider/T04.wav" },
+        { "name" : "pewpew", "asset" : "assets/audio/raider/T05.wav" },
+        { "name" : "march", "asset" : "assets/audio/raider/T06.wav" },
+        { "name" : "blaster", "asset" : "assets/audio/falcon/blaster.wav" },
+        { "name" : "hyperdrive", "asset" : "assets/audio/falcon/hyperdrive.wav" },
+        { "name" : "launch", "asset" : "assets/audio/falcon/launch.wav" },
+        { "name" : "notmyfault", "asset" : "assets/audio/falcon/notmyfault.wav" },
+        { "name" : "watchwhat", "asset" : "assets/audio/falcon/watchwhat.wav" }
     ];
 
     // used for an example of ngFor and navigation
@@ -49,8 +54,19 @@ export class MyApp {
         },
         {
             name: "Millenium Falcon",
-            effects: [ ],
-            controls: [ ],
+            effects: [ 
+                { "name" : "blaster", "desc" : "Turret", "subtitle" : "powpowpowpowpowww!!!", "audio" : "blaster" },
+                { "name" : "hyperdrive", "desc" : "Hyperdrive", "subtitle" : "Punch it!", "audio" : "hyperdrive" },
+                { "name" : "launch", "desc" : "Launch", "subtitle" : "This piece of junk?", "audio" : "launch" },
+                { "name" : "notmyfault", "desc" : "Lando", "subtitle" : "It's not my fault!", "audio" : "notmyfault" },
+                { "name" : "watchwhat", "desc" : "Leia", "subtitle" : "Watch what?", "audio" : "watchwhat" }
+            ],
+            controls: [ 
+                { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100, "value" : 80 },
+                { "name" : "pulse", "desc" : "Engine Pulse", "min" : 0, "max" : 40, "value" : 20 },
+                { "name" : "rate", "desc" : "Pulse Rate", "min" : 20, "max" : 100, "value" : 40 },
+                { "name" : "headlights", "desc" : "Headlights", "min" : 0, "max" : 100, "value" : 50 },
+            ],
             background: "./assets/imgs/falcon.png"
         }
     ];
