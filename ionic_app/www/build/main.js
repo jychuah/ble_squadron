@@ -851,7 +851,10 @@ var MyApp = (function () {
             { "name": "hyperdrive", "asset": "assets/audio/falcon/hyperdrive.wav" },
             { "name": "launch", "asset": "assets/audio/falcon/launch.wav" },
             { "name": "notmyfault", "asset": "assets/audio/falcon/notmyfault.wav" },
-            { "name": "watchwhat", "asset": "assets/audio/falcon/watchwhat.wav" }
+            { "name": "watchwhat", "asset": "assets/audio/falcon/watchwhat.wav" },
+            { "name": "tantivelaunch", "asset": "assets/audio/tantive/launch.wav" },
+            { "name": "alarm", "asset": "assets/audio/tantive/alarm.wav" },
+            { "name": "pursuit", "asset": "assets/audio/tantive/pursuit.wav" },
         ];
         // used for an example of ngFor and navigation
         this.devices = [
@@ -888,7 +891,20 @@ var MyApp = (function () {
                     { "name": "headlights", "desc": "Headlights", "min": 0, "max": 100, "value": 50 },
                 ],
                 background: "./assets/imgs/falcon.png"
-            }
+            },
+            {
+                name: "Tantive IV",
+                effects: [
+                    { "name": "launch", "desc": "Launch", "subtitle": "LAAAAAAAUNCCCHH!!!!!", "audio": "tantivelaunch" },
+                    { "name": "alarm", "desc": "Alarm", "subtitle": "They've shut down the main reactor", "audio": "alarm" },
+                    { "name": "pursuit", "desc": "Pursuit", "subtitle": "We're on a diplomatic mission", "audio": "pursuit" }
+                ],
+                controls: [
+                    { "name": "glow", "desc": "Engine Glow", "min": 0, "max": 100, "value": 80 },
+                    { "name": "flicker", "desc": "Engine Flicker", "min": 0, "max": 50, "value": 20 },
+                ],
+                background: "./assets/imgs/falcon.png"
+            },
         ];
         for (var _i = 0, _a = this.audioclips; _i < _a.length; _i++) {
             var clip = _a[_i];
