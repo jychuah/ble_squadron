@@ -83,7 +83,7 @@ export class MyApp {
                 { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100, "value" : 80 },
                 { "name" : "flicker", "desc" : "Engine Flicker", "min" : 0, "max" : 50, "value" : 20 },
             ],
-            background: "./assets/imgs/falcon.png"
+            background: "./assets/imgs/tantive.png"
         },
     ];
 
