@@ -68,7 +68,7 @@ var SmartAudioProvider = (function () {
     };
     SmartAudioProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]])
     ], SmartAudioProvider);
     return SmartAudioProvider;
 }());
@@ -388,7 +388,7 @@ var MultiBLEProvider = (function () {
     };
     MultiBLEProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_ble__["a" /* BLE */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_ble__["a" /* BLE */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
     ], MultiBLEProvider);
     return MultiBLEProvider;
 }());
@@ -457,7 +457,7 @@ var HomePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>BLuE Squadron</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h5>Device Status</h5>\n    <blelist [disableSelect]="true"></blelist>\n</ion-content>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
     ], HomePage);
     return HomePage;
 }());
@@ -520,7 +520,7 @@ var DevicePage = (function () {
             if (_this.blelist && event.device_id == _this.device_id) {
                 if (event.event == "connected") {
                     _this.storage.set(_this.storage_key, _this.blelist.selectedDevice);
-                    setTimeout(function () { _this.blelist.setVisibility(false); }, 1000);
+                    _this.hideBleList();
                 }
                 if (event.event == "error" || event.event == "disconnected") {
                     _this.blelist.setVisibility(true);
@@ -528,6 +528,10 @@ var DevicePage = (function () {
             }
         });
     }
+    DevicePage.prototype.hideBleList = function () {
+        var _this = this;
+        setTimeout(function () { _this.blelist.setVisibility(false); setTimeout(function () { _this.content.resize(); }, 750); }, 1000);
+    };
     DevicePage.prototype.send = function (message) {
         var device = this.multible.devices[this.device_id];
         if (device && device.connected) {
@@ -567,7 +571,7 @@ var DevicePage = (function () {
                     _this.deviceDisplayName = _this.multible.devices[_this.device_id].name ? _this.multible.devices[_this.device_id].name : data;
                 }
                 if (_this.multible.devices[_this.device_id] && _this.multible.devices[_this.device_id].connected) {
-                    _this.blelist.setVisibility(false);
+                    _this.hideBleList();
                 }
             });
         }
@@ -576,12 +580,16 @@ var DevicePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('blelist'),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__components_blelist_blelist__["a" /* BLEListComponent */])
     ], DevicePage.prototype, "blelist", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Content */])
+    ], DevicePage.prototype, "content", void 0);
     DevicePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding *ngIf="config" [style.background-image]="background"> \n    <ion-list *ngIf="config.effects">\n        <ion-list-header class="device_item">Effects</ion-list-header>\n        <button class="device_item device_item-button" ion-item *ngFor="let effect of config.effects" (click)="runEffect(effect)">\n            <h3>{{ effect.desc }}</h3>\n            <p>{{ effect.subtitle }}</p>\n        </button>\n    </ion-list>\n    <ion-list *ngIf="config.controls">\n        <ion-list-header class="device_item">Controls</ion-list-header>\n        <ion-item class="device_item" *ngFor="let control of config.controls" class="device_item">\n            <ion-label><h3>{{ control.desc }}</h3></ion-label>\n            <ion-range class="device_item-button" [min]="control.min" [max]="control.max" [(ngModel)]="control.value" step="1" (ionChange)="controlSlider(control)">\n                <ion-icon small range-left name="sunny"></ion-icon>\n                <ion-icon range-right name="sunny"></ion-icon>\n            </ion-range>\n        </ion-item>\n    </ion-list>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/
+            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding *ngIf="config" [style.background-image]="background"> \n    <ion-list *ngIf="config.effects">\n        <ion-list-header class="device_item"><h2>Effects</h2></ion-list-header>\n        <button class="device_item device_item-button" ion-item *ngFor="let effect of config.effects" (click)="runEffect(effect)">\n            <h2>{{ effect.desc }}</h2>\n            <p>{{ effect.subtitle }}</p>\n        </button>\n    </ion-list>\n    <ion-list *ngIf="config.controls">\n        <ion-list-header class="device_item">Controls</ion-list-header>\n        <ion-item class="device_item" *ngFor="let control of config.controls" class="device_item">\n            <ion-label><h2>{{ control.desc }}</h2></ion-label>\n            <ion-range class="device_item-button" [min]="control.min" [max]="control.max" [(ngModel)]="control.value" step="1" (ionChange)="controlSlider(control)">\n                <ion-icon small range-left name="sunny"></ion-icon>\n                <ion-icon range-right name="sunny"></ion-icon>\n            </ion-range>\n        </ion-item>\n    </ion-list>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */],
             __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]])
     ], DevicePage);
     return DevicePage;
@@ -692,7 +700,7 @@ var BLEListComponent = (function () {
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* Events */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Events */]])
     ], BLEListComponent);
     return BLEListComponent;
 }());
@@ -776,12 +784,12 @@ var AppModule = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: []
                 }),
                 __WEBPACK_IMPORTED_MODULE_9__ionic_storage__["a" /* IonicStorageModule */].forRoot()
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */],
@@ -790,7 +798,7 @@ var AppModule = (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__["a" /* SplashScreen */],
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_8__ionic_native_ble__["a" /* BLE */],
                 __WEBPACK_IMPORTED_MODULE_10__providers_multible_multible__["a" /* MultiBLEProvider */],
                 __WEBPACK_IMPORTED_MODULE_14__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */],
@@ -929,13 +937,13 @@ var MyApp = (function () {
         this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_device_device__["a" /* DevicePage */], { config: device });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item (click)="openHome()">Device Status</button>\n      <ion-item-group>\n          <ion-item-divider color="light">Ships</ion-item-divider>\n          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">\n            {{ device.name }}\n          </button>\n      </ion-item-group>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
     ], MyApp);
     return MyApp;
 }());

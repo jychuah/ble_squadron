@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Events, NavParams } from 'ionic-angular';
+import { NavController, Events, NavParams, Content } from 'ionic-angular';
 import { BLEListComponent } from '../../components/blelist/blelist';
 import { MultiBLEProvider } from '../../providers/multible/multible';
 import { BLE } from '@ionic-native/ble';
@@ -15,6 +15,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class DevicePage {
 
   @ViewChild('blelist') blelist: BLEListComponent;
+  @ViewChild(Content) content: Content;
   public showlist: boolean = true;
   public storage_key : string = "";
   public name: string = "";
@@ -34,7 +35,7 @@ export class DevicePage {
             if (this.blelist && event.device_id == this.device_id) {
                 if (event.event == "connected") {
                     this.storage.set(this.storage_key, this.blelist.selectedDevice);
-                    setTimeout(() => { this.blelist.setVisibility(false); }, 1000);
+                    this.hideBleList();
                } 
                 if (event.event == "error" || event.event == "disconnected") {
                     this.blelist.setVisibility(true);
@@ -42,6 +43,10 @@ export class DevicePage {
             }
         }
     );
+  }
+
+  hideBleList() {
+    setTimeout(() => { this.blelist.setVisibility(false); setTimeout(() => { this.content.resize() }, 750); }, 1000);
   }
 
   send(message: string) {
@@ -91,7 +96,7 @@ export class DevicePage {
                     this.deviceDisplayName = this.multible.devices[this.device_id].name ? this.multible.devices[this.device_id].name : data;
                 }
                 if (this.multible.devices[this.device_id] && this.multible.devices[this.device_id].connected) {
-                    this.blelist.setVisibility(false);
+                    this.hideBleList();
                 }
             }
         );
