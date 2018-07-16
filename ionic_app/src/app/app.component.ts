@@ -38,25 +38,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.devices = [
-        { 
-            name: "Imperial Raider", 
-            effects: [
-                { "name" : "firestern", "desc" : "Forward Firing Arc", "subtitle" : "Concentrate forward firepower!", "audio" : "turbolaser" },
-                { "name" : "fireport", "desc" : "Left Firing Arc", "subtitle" : "Port turbolasers!", "audio" : "turbolaser" },
-                { "name" : "firestar", "desc" : "Right Firing Arc", "subtitle" : "Starboard turbolasers!", "audio" : "turbolaser" },
-                { "name" : "wash", "desc" : "Engine Spinup", "subtitle" : "Ahead full!", "audio" : "enginewash" },
-                { "name" : "pewpew", "desc" : "Pew pew!", "subtitle" : "Lazers...", "audio" : "pewpew" },
-                { "name" : "march", "desc" : "Imperial March!", "subtitle" : "Duhh Duhh Duhhhhh...", "audio" : "march" }
-            ],
-            controls: [
-                { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100, "value" : 30 },
-                { "name" : "flicker", "desc" : "Engine Flicker", "min" : 0, "max" : 30, "value" : 15 },
-                { "name" : "spotlight", "desc" : "Spotlight", "min" : 0, "max" : 100, "value" : 60 },
-            ],
-            background: "./assets/imgs/raider.png"
-        },
         {
-            name: "Millenium Falcon",
+            name: "Millenium Falcon v2",
             effects: [ 
                 { "name" : "blaster", "desc" : "Turret", "subtitle" : "powpowpowpowpowww!!!", "audio" : "blaster" },
                 { "name" : "hyperdrive", "desc" : "Hyperdrive", "subtitle" : "Punch it!", "audio" : "hyperdrive" },
@@ -69,21 +52,9 @@ export class MyApp {
                 { "name" : "pulse", "desc" : "Engine Pulse", "min" : 0, "max" : 40, "value" : 20 },
                 { "name" : "rate", "desc" : "Pulse Rate", "min" : 20, "max" : 100, "value" : 40 },
                 { "name" : "headlights", "desc" : "Headlights", "min" : 0, "max" : 100, "value" : 50 },
+		{ "name" : "arclight", "desc" : "Firing Arcs", "min" : 0, "max" : 100, "value" : 50 },
             ],
             background: "./assets/imgs/falcon.png"
-        },
-        {
-            name: "Tantive IV",
-            effects: [ 
-                { "name" : "launch", "desc" : "Launch", "subtitle" : "LAAAAAAAUNCCCHH!!!!!", "audio" : "tantivelaunch" },
-                { "name" : "alarm", "desc" : "Alarm", "subtitle" : "They've shut down the main reactor", "audio" : "alarm" },
-                { "name" : "pursuit", "desc" : "Pursuit", "subtitle" : "We're on a diplomatic mission", "audio" : "pursuit" }
-            ],
-            controls: [ 
-                { "name" : "glow", "desc" : "Engine Glow", "min" : 0, "max" : 100, "value" : 80 },
-                { "name" : "flicker", "desc" : "Engine Flicker", "min" : 0, "max" : 50, "value" : 20 },
-            ],
-            background: "./assets/imgs/tantive.png"
         },
     ];
 
@@ -100,6 +71,11 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  ionViewDidLoad() {
+    // Open Millenium Falcon v2
+    openDevice(this.devices[0]);
   }
 
   openHome() {
