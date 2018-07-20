@@ -40,13 +40,15 @@
 #define     LEFT_HEADLIGHT      5
 #define     RIGHT_HEADLIGHT     0
 #define     FORWARD_ARC         1
-#define     REAR_ARC            2
-#define     LEFT_ARC            3
-#define     RIGHT_ARC           4
+#define     REAR_ARC            4
+#define     LEFT_ARC            2
+#define     RIGHT_ARC           3
 #define     NUM_ENGINES         5
 
 #define     ARC_LONG            0
 #define     ARC_LAT             1
+#define     ARC_SELECT_PIN      21
+#define     ARC_HIGH_PIN        16
 
 #define     MAX_DUTY_CYCLE      65535
 
@@ -57,19 +59,18 @@ BLECharacteristic *pCharacteristic;
 class Lights {
   public:
   
-    Adafruit_TLC59711 ledDriver = Adafruit_TLC59711(1);
+    Adafruit_TLC59711 ledDriver = Adafruit_TLC59711(1, 5, 18);
     int engine_glow = 80;
-    int engine_pulse = 20;
-    int engine_rate = 40;
+    int engine_pulse = 40;
+    int engine_rate = 800;
     int headlight_intensity = 50;
     int arc_intensity = 50;
-
     int current_firing_arc = ARC_LAT;
 
     int engine_pins [ NUM_ENGINES ] = { 6, 8, 9, 10, 11 };
-    int engine_values[ NUM_ENGINES ];
-    int engine_limits [ NUM_ENGINES ];
-    int engine_directions[ NUM_ENGINES ];
+    int engine_values[ NUM_ENGINES ] = { 0, 0, 0, 0, 0 };
+    int engine_limits [ NUM_ENGINES ] = { MAX_DUTY_CYCLE, MAX_DUTY_CYCLE, MAX_DUTY_CYCLE, MAX_DUTY_CYCLE, MAX_DUTY_CYCLE };
+    int engine_directions[ NUM_ENGINES ] = { 1, -1, 1, -1, 1 };
     bool effectPlaying = false;
 
     void set_limit(int pin) {
@@ -83,19 +84,24 @@ class Lights {
         }
     }
 
+    void setPin(int pin, int val) {
+      ledDriver.setPWM((uint8_t)pin, (uint16_t)val & 65535);
+      ledDriver.write();
+    }
+
     void set_headlights(int val) {
-      ledDriver.setPWM(LEFT_HEADLIGHT, val);
-      ledDriver.setPWM(RIGHT_HEADLIGHT, val);
+      setPin(LEFT_HEADLIGHT, val);
+      setPin(RIGHT_HEADLIGHT, val);
     }
 
     void set_long_arcs(int val) {
-      ledDriver.setPWM(FORWARD_ARC, val);
-      ledDriver.setPWM(REAR_ARC, val);
+      setPin(FORWARD_ARC, val);
+      setPin(REAR_ARC, val);
     }
 
     void set_lateral_arcs(int val) {
-      ledDriver.setPWM(LEFT_ARC, val);
-      ledDriver.setPWM(RIGHT_ARC, val);
+      setPin(LEFT_ARC, val);
+      setPin(RIGHT_ARC, val);
     }
 
     void switch_directions(int pin) {
@@ -110,9 +116,11 @@ class Lights {
       engine_pins[ 3 ] = 10;
       engine_pins[ 4 ] = 11;
       ledDriver.begin();
-      for (int i = 0; i <= 15; i = i + 1) {
-        ledDriver.setPWM(i, 0);
+      for (int i = 0; i < 12; i = i + 1) {
+        setPin(i, 0);
       }
+      ledDriver.write();
+      
       for (int i = 0; i < NUM_ENGINES; i++) {
         engine_directions[i] = pow(-1, i + 1);
         engine_values[i] = engine_glow / 100.0 * MAX_DUTY_CYCLE;        
@@ -120,11 +128,22 @@ class Lights {
       }
     }
 
+
     void pulse_engines() {
-      set_headlights( (int)(MAX_DUTY_CYCLE * 0.25 * headlight_intensity / 100.0));
+      set_headlights( (int)(MAX_DUTY_CYCLE * 0.12 * headlight_intensity / 100.0));
+
 
       if (!effectPlaying) {
-        for (int i = 0; i < NUM_ENGINES; i++) {
+        
+        if (digitalRead( ARC_SELECT_PIN ) == HIGH) {
+          current_firing_arc = ARC_LAT;
+        } else {
+          current_firing_arc = ARC_LONG;
+        }
+
+
+        for (int i = 0; i < NUM_ENGINES ; i++) {
+          
           engine_values[i] += engine_directions[i] * engine_rate;
           if (engine_values[i] > MAX_DUTY_CYCLE) {
             engine_values[i] = MAX_DUTY_CYCLE;
@@ -141,71 +160,75 @@ class Lights {
               switch_directions(i);
             }
           }
-          ledDriver.setPWM(engine_pins[i], engine_values[i]);
+          setPin(engine_pins[i], engine_values[i]);
         }
+        
 
+        //portENTER_CRITICAL(&mux);
         if (current_firing_arc == ARC_LAT) {
-          set_lateral_arcs( (int)(MAX_DUTY_CYCLE * 0.25 * arc_intensity / 100.0));
+          set_lateral_arcs( (int)(MAX_DUTY_CYCLE * 0.5 * arc_intensity / 100.0));
           set_long_arcs( 0 );
         } else {
           set_lateral_arcs( 0 );
-          set_long_arcs( (int)(MAX_DUTY_CYCLE * 0.25 * arc_intensity / 100.0));
+          set_long_arcs( (int)(MAX_DUTY_CYCLE * 0.5 * arc_intensity / 100.0));
         }
       }
-  
+//      ledDriver.write();
+        
       delay(10);
-
     }
+    
 
     void set_engines(int val) {
       for (int i = 0; i < NUM_ENGINES; i++) {
-        ledDriver.setPWM(engine_pins[i], val);
+        setPin(engine_pins[i], val);
       }
     }
     
     void blaster() {
       for (int i = 0; i < 14; i++) {
-        for (int j = 1; j < MAX_DUTY_CYCLE; j = j * 8) {
-          set_headlights(j);
-          delay(12);
+        for (int j = 1; j < MAX_DUTY_CYCLE; j = j * 4) {
+          set_lateral_arcs(j);
+          set_long_arcs(j);
+          delay(18);
         }
       }
     }
 
     void hyperdrive() {
-      for (int i = 0; i < 1100; i++) {
+      for (int i = 0; i < 15000; i = i + 8) {
         set_engines(i);
         delay(1);
       }
       set_engines(MAX_DUTY_CYCLE);
-      delay(800);
-      for (int i = MAX_DUTY_CYCLE; i > 1150; i = i - 6) {
+      delay(500);
+      for (int i = MAX_DUTY_CYCLE; i > 15000; i = i - 64) {
         set_engines(i);
         delay(1);
       }
     }
 
     void launch() {
-      set_engines(100);
-      set_headlights(500);
+      set_engines(10);
+      set_headlights(0);
       delay(250);
-      set_headlights(1);
+      set_headlights(10000);
       delay(250);
-      set_headlights(500);
+      set_headlights(0);
       delay(250);
-      set_headlights(1);
+      set_headlights(10000);
       delay(250);
-      set_headlights(2048);
-      for (int i = 100; i < 1350; i++) {
+      set_headlights(32000);
+      for (int i = 100; i < 15000; i = i + 7) {
         set_engines(i);
         delay(1);
       }
       for (int i = 0; i < 10; i++) {
-        for (int j = MAX_DUTY_CYCLE / 2; j < MAX_DUTY_CYCLE; j = j + 30) {
+        for (int j = MAX_DUTY_CYCLE / 2; j < MAX_DUTY_CYCLE; j = j + 300) {
           set_engines(j);
           delay(1);
         }
-        for (int j = MAX_DUTY_CYCLE; j > MAX_DUTY_CYCLE / 2; j = j - 30) {
+        for (int j = MAX_DUTY_CYCLE; j > MAX_DUTY_CYCLE / 2; j = j - 300) {
           set_engines(j);
           delay(1);
         }
@@ -215,13 +238,13 @@ class Lights {
     void notmyfault() {
       set_engines(300);
       delay(1000);
-      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 30) {
+      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 350) {
         set_engines(i);
         delay(10);
       }
       set_engines(MAX_DUTY_CYCLE);
       for (int i = 0; i < 10; i++) {
-        for(int j = MAX_DUTY_CYCLE - i * 300; j > 1; j = j / 2) {
+        for(int j = MAX_DUTY_CYCLE - i * 5000; j > 1; j = j / 2) {
           set_engines(j);
           delay(25 + i);
         }
@@ -232,15 +255,15 @@ class Lights {
     }
 
     void watchwhat() {
-      set_engines(300);
+      set_engines(6000);
       delay(1300);
-      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 30) {
+      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 350) {
         set_engines(i);
         delay(7);
       }
       set_engines(MAX_DUTY_CYCLE);
       for (int i = 0; i < 8; i++) {
-        for(int j = MAX_DUTY_CYCLE - i * 300; j > 1; j = j / 2) {
+        for(int j = MAX_DUTY_CYCLE - i * 5000; j > 1; j = j / 2) {
           set_engines(j);
           delay(25 + i);
         }
@@ -376,7 +399,12 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Millenium Falcon v2");
 
+  pinMode(ARC_HIGH_PIN, OUTPUT);
+  digitalWrite(ARC_HIGH_PIN, HIGH);
+  pinMode(ARC_SELECT_PIN, INPUT_PULLDOWN);
+  
   lights = new Lights();
+
 
   Serial.println("LED Driver initiated");
   
@@ -403,6 +431,7 @@ void setup() {
                                          BLECharacteristic::PROPERTY_WRITE
                                          | BLECharacteristic::PROPERTY_WRITE_NR
                                        );
+                                       
 
   pCharacteristic->setCallbacks(new MyCallbacks(lights));
 
@@ -411,6 +440,7 @@ void setup() {
 
   // Start advertising
   pServer->getAdvertising()->start();
+
   Serial.println("Waiting a client connection to notify...");
 }
 
