@@ -187,47 +187,48 @@ class Lights {
     
     void blaster() {
       for (int i = 0; i < 14; i++) {
-        for (int j = 1; j < MAX_DUTY_CYCLE; j = j * 8) {
-          set_headlights(j);
-          delay(12);
+        for (int j = 1; j < MAX_DUTY_CYCLE; j = j * 4) {
+          set_lateral_arcs(j);
+          set_long_arcs(j);
+          delay(18);
         }
       }
     }
 
     void hyperdrive() {
-      for (int i = 0; i < 1100; i++) {
+      for (int i = 0; i < 15000; i = i + 8) {
         set_engines(i);
         delay(1);
       }
       set_engines(MAX_DUTY_CYCLE);
-      delay(800);
-      for (int i = MAX_DUTY_CYCLE; i > 1150; i = i - 6) {
+      delay(500);
+      for (int i = MAX_DUTY_CYCLE; i > 15000; i = i - 64) {
         set_engines(i);
         delay(1);
       }
     }
 
     void launch() {
-      set_engines(100);
-      set_headlights(500);
+      set_engines(10);
+      set_headlights(0);
       delay(250);
-      set_headlights(1);
+      set_headlights(10000);
       delay(250);
-      set_headlights(500);
+      set_headlights(0);
       delay(250);
-      set_headlights(1);
+      set_headlights(10000);
       delay(250);
-      set_headlights(2048);
-      for (int i = 100; i < 1350; i++) {
+      set_headlights(32000);
+      for (int i = 100; i < 15000; i = i + 7) {
         set_engines(i);
         delay(1);
       }
       for (int i = 0; i < 10; i++) {
-        for (int j = MAX_DUTY_CYCLE / 2; j < MAX_DUTY_CYCLE; j = j + 30) {
+        for (int j = MAX_DUTY_CYCLE / 2; j < MAX_DUTY_CYCLE; j = j + 300) {
           set_engines(j);
           delay(1);
         }
-        for (int j = MAX_DUTY_CYCLE; j > MAX_DUTY_CYCLE / 2; j = j - 30) {
+        for (int j = MAX_DUTY_CYCLE; j > MAX_DUTY_CYCLE / 2; j = j - 300) {
           set_engines(j);
           delay(1);
         }
@@ -237,13 +238,13 @@ class Lights {
     void notmyfault() {
       set_engines(300);
       delay(1000);
-      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 30) {
+      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 350) {
         set_engines(i);
         delay(10);
       }
       set_engines(MAX_DUTY_CYCLE);
       for (int i = 0; i < 10; i++) {
-        for(int j = MAX_DUTY_CYCLE - i * 300; j > 1; j = j / 2) {
+        for(int j = MAX_DUTY_CYCLE - i * 5000; j > 1; j = j / 2) {
           set_engines(j);
           delay(25 + i);
         }
@@ -254,15 +255,15 @@ class Lights {
     }
 
     void watchwhat() {
-      set_engines(300);
+      set_engines(6000);
       delay(1300);
-      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 30) {
+      for (int i = 1000; i < MAX_DUTY_CYCLE; i = i + 350) {
         set_engines(i);
         delay(7);
       }
       set_engines(MAX_DUTY_CYCLE);
       for (int i = 0; i < 8; i++) {
-        for(int j = MAX_DUTY_CYCLE - i * 300; j > 1; j = j / 2) {
+        for(int j = MAX_DUTY_CYCLE - i * 5000; j > 1; j = j / 2) {
           set_engines(j);
           delay(25 + i);
         }
