@@ -326,7 +326,7 @@ class Lights {
     }
 
     void rate(std::string param) {
-        engine_rate = atoi(param.c_str() );
+        engine_rate = atoi(param.c_str() ) * 10;
         Serial.print("pulse rate ");
         Serial.printf("%d\n", engine_rate);
     }
