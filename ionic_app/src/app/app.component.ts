@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { HomePage } from '../pages/home/home';
 import { DevicePage } from '../pages/device/device';
+import { BLEListComponent } from '../components/blelist/blelist';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,19 +22,11 @@ export class MyApp {
     this.initializeApp();
 
     this.audioclips = [
-        { "name" : "siren", "asset" : "assets/audio/raider/T02.wav" },
-        { "name" : "turbolaser", "asset" : "assets/audio/raider/T03.wav" },
-        { "name" : "enginewash", "asset" : "assets/audio/raider/T04.wav" },
-        { "name" : "pewpew", "asset" : "assets/audio/raider/T05.wav" },
-        { "name" : "march", "asset" : "assets/audio/raider/T06.wav" },
         { "name" : "blaster", "asset" : "assets/audio/falcon/blaster.wav" },
         { "name" : "hyperdrive", "asset" : "assets/audio/falcon/hyperdrive.wav" },
         { "name" : "launch", "asset" : "assets/audio/falcon/launch.wav" },
         { "name" : "notmyfault", "asset" : "assets/audio/falcon/notmyfault.wav" },
         { "name" : "watchwhat", "asset" : "assets/audio/falcon/watchwhat.wav" },
-        { "name" : "tantivelaunch", "asset" : "assets/audio/tantive/launch.wav" },
-        { "name" : "alarm", "asset" : "assets/audio/tantive/alarm.wav" },
-        { "name" : "pursuit", "asset" : "assets/audio/tantive/pursuit.wav" },
     ];
 
     // used for an example of ngFor and navigation
@@ -75,7 +68,7 @@ export class MyApp {
 
   ionViewDidLoad() {
     // Open Millenium Falcon v2
-    openDevice(this.devices[0]);
+    this.openDevice(this.devices[0]);
   }
 
   openHome() {

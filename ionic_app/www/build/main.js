@@ -455,7 +455,7 @@ var HomePage = (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>BLuE Squadron</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h5>Device Status</h5>\n    <blelist [disableSelect]="true"></blelist>\n</ion-content>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/jchuah/ble_squadron/ionic_app/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>BLuE Squadron</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h5>Device Status</h5>\n    <blelist [disableSelect]="true"></blelist>\n</ion-content>\n'/*ion-inline-end:"/Users/jchuah/ble_squadron/ionic_app/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
     ], HomePage);
@@ -586,7 +586,7 @@ var DevicePage = (function () {
     ], DevicePage.prototype, "content", void 0);
     DevicePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding *ngIf="config" [style.background-image]="background"> \n    <ion-list *ngIf="config.effects" class="padding">\n        <ion-list-header class="device_item"><ion-icon name="radio" item-start></ion-icon><h2>Effects</h2></ion-list-header>\n        <button class="device_item device_item-button" ion-item *ngFor="let effect of config.effects" (click)="runEffect(effect)">\n            <ion-avatar item-start></ion-avatar>\n            <h2>{{ effect.desc }}</h2>\n            <p>{{ effect.subtitle }}</p>\n        </button>\n    </ion-list>\n    <br />\n    <ion-list *ngIf="config.controls" class="padding">\n        <ion-list-header class="device_item"><ion-icon name="options" item-start></ion-icon><h2>Controls</h2></ion-list-header>\n        <ion-item class="device_item" *ngFor="let control of config.controls" class="device_item">\n            <ion-label><h2>{{ control.desc }}</h2></ion-label>\n            <ion-range class="device_item-button" [min]="control.min" [max]="control.max" [(ngModel)]="control.value" step="1" (ionChange)="controlSlider(control)">\n                <ion-icon small range-left name="sunny"></ion-icon>\n                <ion-icon range-right name="sunny"></ion-icon>\n            </ion-range>\n        </ion-item>\n    </ion-list>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/pages/device/device.html"*/
+            selector: 'page-device',template:/*ion-inline-start:"/Users/jchuah/ble_squadron/ionic_app/src/pages/device/device.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding *ngIf="config" [style.background-image]="background"> \n    <ion-list *ngIf="config.effects" class="padding">\n        <ion-list-header class="device_item"><ion-icon name="radio" item-start></ion-icon><h2>Effects</h2></ion-list-header>\n        <button class="device_item device_item-button" ion-item *ngFor="let effect of config.effects" (click)="runEffect(effect)">\n            <ion-avatar item-start></ion-avatar>\n            <h2>{{ effect.desc }}</h2>\n            <p>{{ effect.subtitle }}</p>\n        </button>\n    </ion-list>\n    <br />\n    <ion-list *ngIf="config.controls" class="padding">\n        <ion-list-header class="device_item"><ion-icon name="options" item-start></ion-icon><h2>Controls</h2></ion-list-header>\n        <ion-item class="device_item" *ngFor="let control of config.controls" class="device_item">\n            <ion-label><h2>{{ control.desc }}</h2></ion-label>\n            <ion-range class="device_item-button" [min]="control.min" [max]="control.max" [(ngModel)]="control.value" step="1" (ionChange)="controlSlider(control)">\n                <ion-icon small range-left name="sunny"></ion-icon>\n                <ion-icon range-right name="sunny"></ion-icon>\n            </ion-range>\n        </ion-item>\n    </ion-list>\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar *ngIf="blelist && blelist.visibleState != \'visible\'">\n        <span *ngIf="blelist">{{ deviceDisplayName }}</span>\n        <ion-buttons end>\n            <button ion-button (click)="switchDevice()">Switch device</button>\n        </ion-buttons>\n    </ion-toolbar>\n    <blelist #blelist *ngIf="showlist" (deviceSelected)="deviceSelected($event)" [services]="services"></blelist>\n</ion-footer>\n'/*ion-inline-end:"/Users/jchuah/ble_squadron/ionic_app/src/pages/device/device.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */],
             __WEBPACK_IMPORTED_MODULE_3__providers_multible_multible__["a" /* MultiBLEProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_ble__["a" /* BLE */],
@@ -685,7 +685,7 @@ var BLEListComponent = (function () {
     ], BLEListComponent.prototype, "selectEmitter", void 0);
     BLEListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'blelist',template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/components/blelist/blelist.html"*/'<!-- Generated template for the BlelistComponent component -->\n<div [@visibility]="visibleState">\n    <ion-list no-lines>\n        <ion-list-header>Bluetooth Devices</ion-list-header>\n        <button ion-item *ngFor="let device_id of multible.device_ids" (click)="selectDevice(device_id)" [disabled]="!multible.isEnabled || disableSelect">\n            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && multible.devices[device_id].connected" name="checkmark-circle"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && !multible.devices[device_id].connected && !multible.devices[device_id].connecting" name="alert"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && multible.devices[device_id].connected" name="checkmark"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && !multible.devices[device_id].connected && multible.devices[device_id].stored && !multible.devices[device_id].connecting" name="">!</ion-icon>\n            <ion-spinner item-end *ngIf="multible.devices[device_id].connecting" name="bubbles"></ion-spinner>\n            {{ multible.devices[device_id].name ? multible.devices[device_id].name : device_id }}\n        </button>\n        <button ion-button full *ngIf="!multible.isEnabled" (click)="enableBluetooth()">Enable Bluetooth</button>\n        <button ion-button full *ngIf="multible.isEnabled && multible.scanning" (click)="stopScanning()">Stop Scanning&nbsp;&nbsp;&nbsp; <ion-spinner name="bubbles"></ion-spinner></button>\n        <button ion-button full *ngIf="multible.isEnabled && !multible.scanning" (click)="startScanning()">Start Scanning</button>\n    </ion-list>\n</div>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/components/blelist/blelist.html"*/,
+            selector: 'blelist',template:/*ion-inline-start:"/Users/jchuah/ble_squadron/ionic_app/src/components/blelist/blelist.html"*/'<!-- Generated template for the BlelistComponent component -->\n<div [@visibility]="visibleState">\n    <ion-list no-lines>\n        <ion-list-header>Bluetooth Devices</ion-list-header>\n        <button ion-item *ngFor="let device_id of multible.device_ids" (click)="selectDevice(device_id)" [disabled]="!multible.isEnabled || disableSelect">\n            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && multible.devices[device_id].connected" name="checkmark-circle"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id == selectedDevice && !multible.devices[device_id].connected && !multible.devices[device_id].connecting" name="alert"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && multible.devices[device_id].connected" name="checkmark"></ion-icon>\n            <ion-icon item-end *ngIf="multible.devices[device_id].id != selectedDevice && !multible.devices[device_id].connected && multible.devices[device_id].stored && !multible.devices[device_id].connecting" name="">!</ion-icon>\n            <ion-spinner item-end *ngIf="multible.devices[device_id].connecting" name="bubbles"></ion-spinner>\n            {{ multible.devices[device_id].name ? multible.devices[device_id].name : device_id }}\n        </button>\n        <button ion-button full *ngIf="!multible.isEnabled" (click)="enableBluetooth()">Enable Bluetooth</button>\n        <button ion-button full *ngIf="multible.isEnabled && multible.scanning" (click)="stopScanning()">Stop Scanning&nbsp;&nbsp;&nbsp; <ion-spinner name="bubbles"></ion-spinner></button>\n        <button ion-button full *ngIf="multible.isEnabled && !multible.scanning" (click)="startScanning()">Start Scanning</button>\n    </ion-list>\n</div>\n'/*ion-inline-end:"/Users/jchuah/ble_squadron/ionic_app/src/components/blelist/blelist.html"*/,
             animations: [
                 Object(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["j" /* trigger */])('visibility', [
                     Object(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["g" /* state */])('visible', Object(__WEBPACK_IMPORTED_MODULE_3__angular_animations__["h" /* style */])({
@@ -850,41 +850,16 @@ var MyApp = (function () {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
         this.audioclips = [
-            { "name": "siren", "asset": "assets/audio/raider/T02.wav" },
-            { "name": "turbolaser", "asset": "assets/audio/raider/T03.wav" },
-            { "name": "enginewash", "asset": "assets/audio/raider/T04.wav" },
-            { "name": "pewpew", "asset": "assets/audio/raider/T05.wav" },
-            { "name": "march", "asset": "assets/audio/raider/T06.wav" },
             { "name": "blaster", "asset": "assets/audio/falcon/blaster.wav" },
             { "name": "hyperdrive", "asset": "assets/audio/falcon/hyperdrive.wav" },
             { "name": "launch", "asset": "assets/audio/falcon/launch.wav" },
             { "name": "notmyfault", "asset": "assets/audio/falcon/notmyfault.wav" },
             { "name": "watchwhat", "asset": "assets/audio/falcon/watchwhat.wav" },
-            { "name": "tantivelaunch", "asset": "assets/audio/tantive/launch.wav" },
-            { "name": "alarm", "asset": "assets/audio/tantive/alarm.wav" },
-            { "name": "pursuit", "asset": "assets/audio/tantive/pursuit.wav" },
         ];
         // used for an example of ngFor and navigation
         this.devices = [
             {
-                name: "Imperial Raider",
-                effects: [
-                    { "name": "firestern", "desc": "Forward Firing Arc", "subtitle": "Concentrate forward firepower!", "audio": "turbolaser" },
-                    { "name": "fireport", "desc": "Left Firing Arc", "subtitle": "Port turbolasers!", "audio": "turbolaser" },
-                    { "name": "firestar", "desc": "Right Firing Arc", "subtitle": "Starboard turbolasers!", "audio": "turbolaser" },
-                    { "name": "wash", "desc": "Engine Spinup", "subtitle": "Ahead full!", "audio": "enginewash" },
-                    { "name": "pewpew", "desc": "Pew pew!", "subtitle": "Lazers...", "audio": "pewpew" },
-                    { "name": "march", "desc": "Imperial March!", "subtitle": "Duhh Duhh Duhhhhh...", "audio": "march" }
-                ],
-                controls: [
-                    { "name": "glow", "desc": "Engine Glow", "min": 0, "max": 100, "value": 30 },
-                    { "name": "flicker", "desc": "Engine Flicker", "min": 0, "max": 30, "value": 15 },
-                    { "name": "spotlight", "desc": "Spotlight", "min": 0, "max": 100, "value": 60 },
-                ],
-                background: "./assets/imgs/raider.png"
-            },
-            {
-                name: "Millenium Falcon",
+                name: "Millenium Falcon v2",
                 effects: [
                     { "name": "blaster", "desc": "Turret", "subtitle": "powpowpowpowpowww!!!", "audio": "blaster" },
                     { "name": "hyperdrive", "desc": "Hyperdrive", "subtitle": "Punch it!", "audio": "hyperdrive" },
@@ -897,21 +872,9 @@ var MyApp = (function () {
                     { "name": "pulse", "desc": "Engine Pulse", "min": 0, "max": 40, "value": 20 },
                     { "name": "rate", "desc": "Pulse Rate", "min": 20, "max": 100, "value": 40 },
                     { "name": "headlights", "desc": "Headlights", "min": 0, "max": 100, "value": 50 },
+                    { "name": "arclight", "desc": "Firing Arcs", "min": 0, "max": 100, "value": 50 },
                 ],
                 background: "./assets/imgs/falcon.png"
-            },
-            {
-                name: "Tantive IV",
-                effects: [
-                    { "name": "launch", "desc": "Launch", "subtitle": "LAAAAAAAUNCCCHH!!!!!", "audio": "tantivelaunch" },
-                    { "name": "alarm", "desc": "Alarm", "subtitle": "They've shut down the main reactor", "audio": "alarm" },
-                    { "name": "pursuit", "desc": "Pursuit", "subtitle": "We're on a diplomatic mission", "audio": "pursuit" }
-                ],
-                controls: [
-                    { "name": "glow", "desc": "Engine Glow", "min": 0, "max": 100, "value": 80 },
-                    { "name": "flicker", "desc": "Engine Flicker", "min": 0, "max": 50, "value": 20 },
-                ],
-                background: "./assets/imgs/tantive.png"
             },
         ];
         for (var _i = 0, _a = this.audioclips; _i < _a.length; _i++) {
@@ -928,6 +891,10 @@ var MyApp = (function () {
             _this.splashScreen.hide();
         });
     };
+    MyApp.prototype.ionViewDidLoad = function () {
+        // Open Millenium Falcon v2
+        this.openDevice(this.devices[0]);
+    };
     MyApp.prototype.openHome = function () {
         this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */]);
     };
@@ -941,7 +908,7 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item (click)="openHome()">Device Status</button>\n      <ion-item-group>\n          <ion-item-divider color="light">Ships</ion-item-divider>\n          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">\n            {{ device.name }}\n          </button>\n      </ion-item-group>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/jchuah/GitHub/ble_squadron/ionic_app/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jchuah/ble_squadron/ionic_app/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item (click)="openHome()">Device Status</button>\n      <ion-item-group>\n          <ion-item-divider color="light">Ships</ion-item-divider>\n          <button menuClose ion-item *ngFor="let device of devices" (click)="openDevice(device)">\n            {{ device.name }}\n          </button>\n      </ion-item-group>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/jchuah/ble_squadron/ionic_app/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
     ], MyApp);

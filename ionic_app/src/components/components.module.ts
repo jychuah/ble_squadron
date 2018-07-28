@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BLEListComponent } from './blelist/blelist';
 @NgModule({
-	declarations: [BLEListComponent],
+	declarations: [],
 	imports: [],
-	exports: [BLEListComponent]
+	exports: []
 })
 export class ComponentsModule {}
