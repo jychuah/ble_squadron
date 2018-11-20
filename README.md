@@ -4,7 +4,7 @@ This repository contains firmware, schematics and a mobile application for every
 
 ### Lancer Class Pursuit Craft
 
-![Lancer Class Pursuit Craft](./lancer/media/lancer_1.jpg)
+![Lancer Class Pursuit Craft](./lancer/media/lancer_01.jpg)
 
 Featuring firing arc selector via turret push-button.
 
@@ -31,6 +31,6 @@ Featuring firing arc selector via turret push-button.
 
 ### Imperial Raider
 
-![Imperial Raider](./imperial_raider/media/raider_1.png)
+![Imperial Raider](./imperial_raider/media/raider_1.jpg)
 
 - [Files](./imperial_raider)
